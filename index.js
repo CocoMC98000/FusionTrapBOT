@@ -42,7 +42,11 @@ bot.on('message', message => {
 			channel.send('Voici le lien pour répondre à tes problèmes: https://fusiontrap.000webhostapp.com/help-discord.php')
 		}).catch(console.error)
 	}
-    else if (message.content.startsWith("$weather")){
+	else if (message.content.startsWith('$update')) {
+		message.delete()
+		message.reply('@everyone, une mise à jour a eu lieu, vous retrouverez directement toutes les informations de cette mise à jour sur le site http://fusiontrap.000webhostapp.com/discord-maj.php')
+	}
+	else if (message.content.startsWith("$weather")){
     var location = message.content.substr(6);
     var unit = "C";
     
