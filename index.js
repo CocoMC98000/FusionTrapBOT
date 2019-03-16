@@ -14,30 +14,33 @@ bot.on('ready', function(){
 bot.on('guildMemberAdd', member => {
 	member.createDM().then(channel => {
 		channel.send('Bienvenue sur le serveur DISCORD de FusionTrap' + member.displayName + '!')
+		channel.send('Si tu as des problèmes sur le serveur, n\'hésite pas à envoyer la commande $help, je te répondrai directement par MP en t\'envoyant un lien vers les commandes possibles')
 	}).catch(console.error)
 })
 
 var messages = [];
 bot.on('message', message => {
-	if (message.content.startsWith('$admin')) {
+	if (message.content('$admin')) {
 		message.delete()
-		message.reply('This functionnality is unavailable for the moment.')
+		message.reply('https://fusiontrap.000webhostapp.com/signin.php?redirect=admin/index.php')
 	}
-	else if (message.content.startsWith('$website')) {
+	else if (message.content('$website')) {
 		message.delete()
 		message.reply('https://fusiontrap.000webhostapp.com')
 	}
-	else if (message.content.startsWith('$channel')) {
+	else if (message.content('$channel CocoMC98000')) {
 		message.delete()
-		message.reply('This functionnality is unavailable for the moment.')
+		message.reply('https://fusiontrap.000webhostapp.com/channel.php?id=2')
 	}
-	else if (message.content.startsWith('$youtube CocoMC98000')) {
+	else if (message.content('$channel Bsx123')) {
 		message.delete()
-		message.reply('https://www.youtube.com/channel/UCrviJt5GHklB4H5D-X82Plw')
+		message.reply('https://fusiontrap.000webhostapp.com/channel.php?id=1')
 	}
-	else if (message.content.startsWith('$youtube Bsx123')) {
+	else if (message.content('$help')){
 		message.delete()
-		message.reply('https://www.youtube.com/channel/UC_c_s2y5AQ5cT4Oi32icfbA')
+		message.author.createDM().then(channel => {
+			channel.send('Voici le lien pour répondre à tes problèmes: https://fusiontrap.000webhostapp.com/help-discord.php')
+		}).catch(console.error)
 	}
     else if (message.content.startsWith("$weather")){
     var location = message.content.substr(6);
@@ -46,7 +49,7 @@ bot.on('message', message => {
     try {
         weather.find({search: location, degreeType: unit}, function(err, data) {
             if(err) {
-                message.reply("\n" + "I can't find the weather informations of " + location);
+                message.reply("\n" + "Je ne trouve aucune information météo pour " + location);
             } else {
                 data = data[0];
                 message.delete();
@@ -60,14 +63,14 @@ bot.on('message', message => {
     }
     else if (message.content.startsWith("$wiki")){
             if(!message.content.substr(5)) {
-                message.reply("You should enter a term to search after the command");
+                message.reply("Vous devez rentrer votre recherche après la commande");
                 return;
             }
             var wiki = new Wiki.default();
             wiki.search(message.content.substr(5)).then(function(data) {
                 if(data.results.length==0) {
 			message.delete();
-                    message.reply("I couldn't find a page about your search on Wikipedia :(");
+                    message.reply("je n'ai pas trouvé de résultat sur Wikipédia :(");
                     return;
                 }
                 wiki.page(data.results[0]).then(function(page) {
@@ -95,12 +98,12 @@ bot.on('message', message => {
                                 }
                             };
 				message.delete();
-                            message.reply("**Found " + page.raw.fullurl + "**", continuation);
+                            message.reply("**Trouvé " + page.raw.fullurl + "**", continuation);
                         }
                     });
                 });
             }, function(err) {
-                message.reply("Uhhh...Something went wrong :(");
+                message.reply("Uhhh...Quelque chose ne va pas :(");
             });      
     }
 })
