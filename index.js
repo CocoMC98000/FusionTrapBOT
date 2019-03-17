@@ -20,23 +20,23 @@ bot.on('guildMemberAdd', member => {
 
 var messages = [];
 bot.on('message', message => {
-	if (message.content('$admin')) {
+	if (message.content.startsWith('$admin')) {
 		message.delete()
 		message.reply('https://fusiontrap.000webhostapp.com/signin.php?redirect=admin/index.php')
 	}
-	else if (message.content('$website')) {
+	else if (message.content.startsWith('$website')) {
 		message.delete()
 		message.reply('https://fusiontrap.000webhostapp.com')
 	}
-	else if (message.content('$channel CocoMC98000')) {
+	else if (message.content.startsWith('$channel CocoMC98000')) {
 		message.delete()
 		message.reply('https://fusiontrap.000webhostapp.com/channel.php?id=2')
 	}
-	else if (message.content('$channel Bsx123')) {
+	else if (message.content.startsWith('$channel Bsx123')) {
 		message.delete()
 		message.reply('https://fusiontrap.000webhostapp.com/channel.php?id=1')
 	}
-	else if (message.content('$help')){
+	else if (message.content.startsWith('$help')){
 		message.delete()
 		message.author.createDM().then(channel => {
 			channel.send('Voici le lien pour répondre à tes problèmes: https://fusiontrap.000webhostapp.com/help-discord.php')
