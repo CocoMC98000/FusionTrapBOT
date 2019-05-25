@@ -44,7 +44,9 @@ bot.on('message', message => {
 	}
 	else if (message.content.startsWith('$update')) {
 		message.delete()
-		message.reply('@everyone, une mise à jour a eu lieu, vous retrouverez directement toutes les informations de cette mise à jour sur le site http://fusiontrap.000webhostapp.com/discord-maj.php')
+		const channel = member.guild.channels.find(ch => ch.name === 'news');
+		if (!channel) return;
+		channel.send(`@everyone, une mise à jour vient d'avoir lieu sur le BOT. Afin de voir les modifications, veuillez vous rendre à cette page web: https://fusiontrap.000webhostapp.com/discrod-maj.php`);
 	}
 	else if (message.content.startsWith("$weather")){
     var location = message.content.substr(6);
